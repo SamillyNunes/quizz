@@ -4,6 +4,13 @@ import styles from "../styles/Question.module.css";
 import Answer from "./Answer";
 import Statement from "./Statement";
 
+const letters = [
+    {value: 'A', color: '#F2C866'},
+    {value: 'B', color: '#F266BA'},
+    {value: 'C', color: '#85DAF2'},
+    {value: 'D', color: '#BCE596'},
+];
+
 interface QuestionProps{
     value: QuestionModel;
 }
@@ -17,8 +24,8 @@ export default function Question(props: QuestionProps){
                 key={i}
                 value={a}
                 index={i}
-                letter="A"
-                color="#F2C866"
+                letter={letters[i].value}
+                color={letters[i].color}
             />
         ));
     }
