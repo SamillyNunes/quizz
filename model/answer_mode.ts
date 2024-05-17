@@ -36,4 +36,8 @@ export default class AnswerModel{
             isRevealed: this.#isRevealed,
         };
     }
+
+    reveal(){
+        return new AnswerModel(this.#value, this.#isRight, true);
+    }
 }

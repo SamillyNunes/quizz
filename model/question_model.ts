@@ -44,12 +44,24 @@ export default class QuestionModel{
         return new QuestionModel(this.#id, this.#statement, shuffledAnswers, this.#corretlyAnswered);
     }
 
+    answerWith(index: number): QuestionModel{
+        const hasAnsweredCorrectly = this.#answers[index]?.isRight;
+        const answers = this.#answers.map( (answer:AnswerModel, i: number) => {
+            const isTheSelectedAnswer = index ===i;
+            const shouldReveal = isTheSelectedAnswer || answer.isRight;
+            return shouldReveal ? answer.reveal() : answer;
+        } );
+        return new QuestionModel(this.id, this.statement, answers, hasAnsweredCorrectly);
+
+    }
+
     toMap(){
         return {
             id: this.#id,
             statement: this.#statement,
-            answers: this.#answers.map(a => a.toMap()),
             corretlyAnswered: this.#corretlyAnswered,
+            answered: this.answered,
+            answers: this.#answers.map(a => a.toMap()),
         };
     }
 }
