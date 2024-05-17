@@ -37,4 +37,13 @@ export default class QuestionModel{
         }
         return false;
     }
+
+    toMap(){
+        return {
+            id: this.#id,
+            statement: this.#statement,
+            answers: this.#answers.map(a => a.toMap()),
+            corretlyAnswered: this.#corretlyAnswered,
+        };
+    }
 }
