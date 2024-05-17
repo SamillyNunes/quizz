@@ -1,5 +1,6 @@
 import QuestionModel from "../../model/question_model";
 import styles from "../styles/Question.module.css";
+import Statement from "./Statement";
 
 interface QuestionProps{
     value: QuestionModel;
@@ -10,7 +11,7 @@ export default function Question(props: QuestionProps){
 
     return (
         <div className={styles.question} >
-            <h1>Questão</h1>
+            <Statement text={question.statement} />
 
         </div>
     );

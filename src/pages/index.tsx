@@ -12,6 +12,13 @@ export default function Home() {
   ]);
 
   return (
-    <Question value={q} />
+    <div style={{
+      display: "flex",
+      height: "100vh",
+      justifyContent: "center",
+      alignItems: "center",
+    }} >
+      <Question value={q} />
+    </div>
   );
 }
