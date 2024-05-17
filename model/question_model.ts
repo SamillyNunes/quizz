@@ -1,11 +1,13 @@
+import AnswerModel from "./answer_mode";
+
 export default class QuestionModel{
     #id: number;
     #statement: string;
-    #answers: any[];
+    #answers: AnswerModel[];
     #corretlyAnswered: boolean;
     // #answered: boolean;
 
-    constructor(id:number, statement: string, answers: any[], corretlyAnswered=false,){
+    constructor(id:number, statement: string, answers: AnswerModel[], corretlyAnswered=false,){
         this.#id=id;
         this.#statement=statement;
         this.#answers=answers;
@@ -29,7 +31,10 @@ export default class QuestionModel{
     }
 
     get answered(){
-        // FIXME: Implementar esse metodo
+        // Verifica se uma das respostas foi revelada ou nao, e se uma tiver sido, ja foi respondida
+        for(let answer of this.#answers){
+            if(answer.isRevealed) return true;
+        }
         return false;
     }
 }
