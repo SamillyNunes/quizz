@@ -1,3 +1,4 @@
+import { shuffle } from "../functions/arrays";
 import AnswerModel from "./answer_mode";
 
 export default class QuestionModel{
@@ -36,6 +37,11 @@ export default class QuestionModel{
             if(answer.isRevealed) return true;
         }
         return false;
+    }
+
+    shuffleAnswers(): QuestionModel{
+        let shuffledAnswers = shuffle(this.#answers);
+        return new QuestionModel(this.#id, this.#statement, shuffledAnswers, this.#corretlyAnswered);
     }
 
     toMap(){

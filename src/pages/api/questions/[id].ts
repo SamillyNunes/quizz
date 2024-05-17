@@ -13,7 +13,7 @@ export default function handler(
   const selectedQuestion = questions.filter(question => question.id===selectedId);
 
   if(selectedQuestion.length===1){
-    const question = selectedQuestion[0];
+    const question = selectedQuestion[0].shuffleAnswers();
     res.status(200).json(question.toMap());
   } else {
     res.status(204).end();
