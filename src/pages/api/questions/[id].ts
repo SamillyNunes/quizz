@@ -8,6 +8,15 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Object>,
 ) {
-  const id = +(req.query?.id ?? 0);
-  res.status(200).json(questions[0].toMap());
+  const selectedId = +(req.query?.id ?? 0);
+
+  const selectedQuestion = questions.filter(question => question.id===selectedId);
+
+  if(selectedQuestion.length===1){
+    const question = selectedQuestion[0];
+    res.status(200).json(question.toMap());
+  } else {
+    res.status(204).end();
+  }
+
 }
