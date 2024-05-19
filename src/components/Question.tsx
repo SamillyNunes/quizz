@@ -15,6 +15,7 @@ const letters = [
 interface QuestionProps{
     value: QuestionModel;
     onResponse: (index: number)=> void;
+    answeringTimer?: number;
     onFinalizedTimer: ()=>void;
 }
 
@@ -37,7 +38,7 @@ export default function Question(props: QuestionProps){
     return (
         <div className={styles.question} >
             <Statement text={question.statement} />
-            <Timer duration={10} finalizedTimer={props.onFinalizedTimer} />
+            <Timer duration={props.answeringTimer ?? 10} finalizedTimer={props.onFinalizedTimer} />
             {renderAnswers()}
         </div>
     );
