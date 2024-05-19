@@ -19,6 +19,14 @@ export default function Home() {
     console.log(index);
   }
 
+  function onFinalizedTimer(){
+    if(!question.answered){
+      // passando o indice -1 significa que o usuario vai errar e vai mostrar a certa
+      setQuestion(question.answerWith(-1));
+
+    }
+  }
+
   return (
     <div style={{
       display: "flex",
@@ -26,7 +34,7 @@ export default function Home() {
       justifyContent: "center",
       alignItems: "center",
     }} >
-      <Question value={question} onResponse={onResponse} />
+      <Question value={question} onResponse={onResponse} onFinalizedTimer={onFinalizedTimer} />
     </div>
   );
 }
