@@ -7,5 +7,11 @@
     border: none;
     padding: 10px 25px;
     margin-top: 20px;
+    cursor: pointer;
+    transition: .2 ease-in-out;
 
+}
+
+.button:hover{
+    transform: scale(1.1);
 }
