@@ -2,6 +2,7 @@ import Question from "@/components/Question";
 import QuestionModel from "../../model/question_model";
 import AnswerModel from "../../model/answer_mode";
 import { useState } from "react";
+import Button from "@/components/Button";
 
 const qMock = new QuestionModel(1, "Melhor cor?", [
   AnswerModel.wrong('Verde'),
@@ -30,11 +31,13 @@ export default function Home() {
   return (
     <div style={{
       display: "flex",
+      flexDirection: "column",
       height: "100vh",
       justifyContent: "center",
       alignItems: "center",
     }} >
       <Question value={question} onResponse={onResponse} onFinalizedTimer={onFinalizedTimer} />
+      <Button text="Próxima" href="/result" />
     </div>
   );
 }
