@@ -3,6 +3,7 @@ import QuestionModel from "../../model/question_model";
 import AnswerModel from "../../model/answer_mode";
 import { useState } from "react";
 import Button from "@/components/Button";
+import Questionnaire from "@/components/Questionnaire";
 
 const qMock = new QuestionModel(1, "Melhor cor?", [
   AnswerModel.wrong('Verde'),
@@ -15,17 +16,12 @@ export default function Home() {
   const [question, setQuestion] = useState(qMock);
 
 
-  function onResponse(index: number){
-    setQuestion(qMock.answerWith(index));
-    console.log(index);
+  function onQuestionAnswered(question: QuestionModel){
+
   }
 
-  function onFinalizedTimer(){
-    if(!question.answered){
-      // passando o indice -1 significa que o usuario vai errar e vai mostrar a certa
-      setQuestion(question.answerWith(-1));
+  function onGoToNextStep(){
 
-    }
   }
 
   return (
@@ -36,8 +32,12 @@ export default function Home() {
       justifyContent: "center",
       alignItems: "center",
     }} >
-      <Question value={question} onResponse={onResponse} onFinalizedTimer={onFinalizedTimer} />
-      <Button text="Próxima" href="/result" />
+      <Questionnaire
+        question={question}
+        isLastQuestion={true}
+        onQuestionAnswered={onQuestionAnswered}
+        goToNextStep={onGoToNextStep}
+      />
     </div>
   );
 }
