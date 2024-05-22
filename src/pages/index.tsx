@@ -52,7 +52,27 @@ export default function Home() {
     }
   }
 
+  // essa funcao vai retornar ou o id da proxima ou undefined caso nao haja mais
+  function getNextQuestionId(){
+    const nextIndex = questionsIds.indexOf(question.id)+1;
+    return questionsIds[nextIndex];
+
+  }
+
   function onGoToNextStep(){
+    const nextId = getNextQuestionId();
+    if(nextId){
+      onGoToNextQuestion(nextId);
+    }
+
+    finalize();
+  }
+
+  function onGoToNextQuestion(nextId: number){
+    loadQuestion(nextId);
+  }
+
+  function finalize(){
 
   }
 
@@ -66,7 +86,7 @@ export default function Home() {
     }} >
       <Questionnaire
         question={question}
-        isLastQuestion={true}
+        isLastQuestion={getNextQuestionId()===undefined}
         onQuestionAnswered={onQuestionAnswered}
         goToNextStep={onGoToNextStep}
       />
