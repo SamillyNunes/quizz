@@ -2,14 +2,16 @@ import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import styles from "../styles/Timer.module.css";
 
 interface TimerProps{
+    key: any;
     duration: number;
-    finalizedTimer: ()=>void;
+    finalizedTimer: () => void;
 }
 
 export default function Timer(props: TimerProps){
     return (
         <div className={styles.timer} >
             <CountdownCircleTimer
+                key={props.key}
                 duration={props.duration}
                 size={120}
                 isPlaying
