@@ -17,6 +17,7 @@ const BASE_URL = 'http://localhost:3000/api';
 export default function Home() {
   const [questionsIds, setQuestionsIds] = useState<number[]>([]);
   const [question, setQuestion] = useState(qMock);
+  const [rightAnswers, setRightAnswers] = useState<number>(0);
 
   async function loadQuestionIds(){
     const resp = await fetch(`${BASE_URL}/questionnaire`);
@@ -44,8 +45,11 @@ export default function Home() {
   }, [questionsIds]);
 
 
-  function onQuestionAnswered(question: QuestionModel){
-
+  function onQuestionAnswered(answeredQuestion: QuestionModel){
+    setQuestion(answeredQuestion);
+    if(answeredQuestion.corretlyAnswered){
+      setRightAnswers(rightAnswers+1);
+    }
   }
 
   function onGoToNextStep(){
