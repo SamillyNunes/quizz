@@ -1,14 +1,13 @@
 import { shuffle } from "../functions/arrays";
-import AnswerModel from "./answer_mode";
+import AnswerModel from "./answer_model";
 
 export default class QuestionModel{
     #id: number;
     #statement: string;
     #answers: AnswerModel[];
     #corretlyAnswered: boolean;
-    // #answered: boolean;
 
-    constructor(id:number, statement: string, answers: AnswerModel[], corretlyAnswered=false,){
+    constructor(id:number, statement: string, answers: AnswerModel[], corretlyAnswered=false){
         this.#id=id;
         this.#statement=statement;
         this.#answers=answers;
@@ -63,5 +62,14 @@ export default class QuestionModel{
             answered: this.answered,
             answers: this.#answers.map(a => a.toMap()),
         };
+    }
+
+    static fromMap(object: any): QuestionModel{
+        return new QuestionModel(
+            object.id,
+            object.statement,
+            object.answers.map((a:any) => AnswerModel.fromMap(a)),
+            object.corretlyAnswered
+        );
     }
 }

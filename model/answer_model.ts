@@ -37,6 +37,10 @@ export default class AnswerModel{
         };
     }
 
+    static fromMap(object: any): AnswerModel{
+        return new AnswerModel(object.value, object.isRight, object.isRevealed);
+    }
+
     reveal(){
         return new AnswerModel(this.#value, this.#isRight, true);
     }

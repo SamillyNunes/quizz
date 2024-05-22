@@ -1,4 +1,4 @@
-import AnswerModel from "../../../model/answer_mode";
+import AnswerModel from "../../../model/answer_model";
 import QuestionModel from "../../../model/question_model";
 
 const questions: QuestionModel[] = [
