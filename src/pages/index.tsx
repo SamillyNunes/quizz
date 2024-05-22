@@ -13,7 +13,7 @@ const qMock = new QuestionModel(1, "Melhor cor?", [
   AnswerModel.right('Azul'),
 ]);
 
-const BASE_URL = 'http://localhost:3000/api';
+const BASE_URL = 'https://quizz-ssn.vercel.app/api';
 
 export default function Home() {
 
