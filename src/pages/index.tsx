@@ -4,6 +4,7 @@ import AnswerModel from "../../model/answer_model";
 import { useEffect, useState } from "react";
 import Button from "@/components/Button";
 import Questionnaire from "@/components/Questionnaire";
+import { useRouter } from "next/router";
 
 const qMock = new QuestionModel(1, "Melhor cor?", [
   AnswerModel.wrong('Verde'),
@@ -15,6 +16,9 @@ const qMock = new QuestionModel(1, "Melhor cor?", [
 const BASE_URL = 'http://localhost:3000/api';
 
 export default function Home() {
+
+  const router = useRouter();
+
   const [questionsIds, setQuestionsIds] = useState<number[]>([]);
   const [question, setQuestion] = useState(qMock);
   const [rightAnswers, setRightAnswers] = useState<number>(0);
@@ -54,8 +58,11 @@ export default function Home() {
 
   // essa funcao vai retornar ou o id da proxima ou undefined caso nao haja mais
   function getNextQuestionId(){
-    const nextIndex = questionsIds.indexOf(question.id)+1;
-    return questionsIds[nextIndex];
+    if(question){
+      const nextIndex = questionsIds.indexOf(question.id)+1;
+      return questionsIds[nextIndex];
+
+    }
 
   }
 
@@ -63,9 +70,11 @@ export default function Home() {
     const nextId = getNextQuestionId();
     if(nextId){
       onGoToNextQuestion(nextId);
+    } else {
+      finalize();
+
     }
 
-    finalize();
   }
 
   function onGoToNextQuestion(nextId: number){
@@ -73,7 +82,15 @@ export default function Home() {
   }
 
   function finalize(){
-
+    router.push(
+      {
+        pathname: '/result',
+        query: {
+          total: questionsIds.length,
+          right: rightAnswers,
+        }
+      }
+    );
   }
 
   return (
