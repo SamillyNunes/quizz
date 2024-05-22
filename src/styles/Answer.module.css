@@ -4,12 +4,20 @@
     margin: 5px;
     width: 80%;
     min-width: 500px;
+    perspective: 1000px;
 }
 
 .content{
     display: flex;
     flex: 1;
     position: relative;
+    transition: transform 0.8s;
+    /*  para preservar o 3d, mostrar o resultado */
+    transform-style: preserve-3d;
+}
+
+.content.answerRevealed{
+    transform: rotateY(180deg);
 }
 
 .letter{
@@ -35,6 +43,9 @@
     height: 100%;
     width: 100%;
     position: absolute;
+    /* As propriedades abaixo sao para indicar que tem um lado de tras */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .front{
@@ -43,6 +54,10 @@
     padding: 15px;
     color: #000;
     background-color: #fff;
+}
+
+.back{
+    transform: rotateY(180deg);
 }
 
 .back > div{
